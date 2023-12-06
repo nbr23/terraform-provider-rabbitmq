@@ -1,3 +1,9 @@
+## 1.9.0 (December 5, 2023)
+
+BUILD / DEV:
+
+* Bump to go1.21, update rabbit-hole dependency
+
 ## 1.8.0 (March 15, 2023)
 
 FEATURES:
