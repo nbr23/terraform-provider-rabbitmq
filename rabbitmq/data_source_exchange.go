@@ -22,13 +22,15 @@ func dataSourcesExchange() *schema.Resource {
 				Description: "The id of the exchange. This is a combination of the name and vhost.",
 			},
 			"name": {
-				Type:     schema.TypeString,
-				Required: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				Description: "The name of the exchange.",
 			},
 			"vhost": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Default:  "/",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "/",
+				Description: "The vhost of the exchange.",
 			},
 			"settings": {
 				Type:     schema.TypeList,
@@ -36,25 +38,29 @@ func dataSourcesExchange() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"type": {
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The type of the exchange.",
 						},
 
 						"durable": {
-							Type:     schema.TypeBool,
-							Optional: true,
-							Default:  false,
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
+							Description: "Whether the exchange is durable or not.",
 						},
 
 						"auto_delete": {
-							Type:     schema.TypeBool,
-							Optional: true,
-							Default:  false,
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
+							Description: "Whether the exchange is auto-deleted when no longer in use.",
 						},
 
 						"arguments": {
-							Type:     schema.TypeMap,
-							Optional: true,
+							Type:        schema.TypeMap,
+							Optional:    true,
+							Description: "Additional key/value settings for the exchange.",
 						},
 					},
 				},
