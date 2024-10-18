@@ -17,11 +17,11 @@ The `rabbitmq_exchange` data source retrieves information about an exchange.
 
 ### Required
 
-- `name` (String)
+- `name` (String) The name of the exchange.
 
 ### Optional
 
-- `vhost` (String)
+- `vhost` (String) The vhost of the exchange.
 
 ### Read-Only
 
