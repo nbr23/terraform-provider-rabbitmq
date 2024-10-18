@@ -12,46 +12,53 @@ import (
 
 func resourceTopicPermissions() *schema.Resource {
 	return &schema.Resource{
-		Create: CreateTopicPermissions,
-		Update: UpdateTopicPermissions,
-		Read:   ReadTopicPermissions,
-		Delete: DeleteTopicPermissions,
+		Create:      CreateTopicPermissions,
+		Update:      UpdateTopicPermissions,
+		Read:        ReadTopicPermissions,
+		Delete:      DeleteTopicPermissions,
+		Description: "The `rabbitmq_topic_permissions` resource creates and manages a user's set of topic permissions.",
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
 		Schema: map[string]*schema.Schema{
 			"user": {
-				Type:     schema.TypeString,
-				Required: true,
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The user to apply the permissions to.",
 			},
 
 			"vhost": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Default:  "/",
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "/",
+				ForceNew:    true,
+				Description: "The vhost to create the resource in.",
 			},
 
 			"permissions": {
-				Type:     schema.TypeSet,
-				Required: true,
+				Type:        schema.TypeSet,
+				Required:    true,
+				Description: "The permissions for the user.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"exchange": {
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The exchange to set the permissions for.",
 						},
 
 						"write": {
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The `write` ACL.",
 						},
 
 						"read": {
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The `read` ACL.",
 						},
 					},
 				},

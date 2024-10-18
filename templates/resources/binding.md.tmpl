@@ -59,27 +59,7 @@ resource "rabbitmq_binding" "test" {
 }
 ```
 
-## Argument Reference
-
-The following arguments are supported:
-
-* `source` - (Required) The source exchange.
-
-* `vhost` - (Required) The vhost to create the resource in.
-
-* `destination` - (Required) The destination queue or exchange.
-
-* `destination_type` - (Required) The type of destination (queue or exchange).
-
-* `routing_key` - (Optional) A routing key for the binding.
-
-* `arguments` - (Optional) Additional key/value arguments for the binding.
-
-## Attributes Reference
-
-In addition to all arguments above, the following attributes are exported:
-
-* `properties_key` - A unique key to refer to the binding.
+{{ .SchemaMarkdown | trimspace }}
 
 ## Import
 

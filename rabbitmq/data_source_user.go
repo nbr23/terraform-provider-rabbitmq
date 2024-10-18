@@ -13,19 +13,23 @@ import (
 func dataSourcesUser() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourcesReadUser,
+		Description: "The `rabbitmq_user` data source retrieves information about a user.",
 		Schema: map[string]*schema.Schema{
 			"id": {
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "The id of the user.",
 			},
 			"name": {
-				Type:     schema.TypeString,
-				Required: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				Description: "The name of the user.",
 			},
 			"tags": {
-				Type:     schema.TypeList,
-				Elem:     &schema.Schema{Type: schema.TypeString},
-				Computed: true,
+				Type:        schema.TypeList,
+				Elem:        &schema.Schema{Type: schema.TypeString},
+				Computed:    true,
+				Description: "The tags of the user.",
 			},
 		},
 	}

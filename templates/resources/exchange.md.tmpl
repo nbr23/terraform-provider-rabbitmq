@@ -40,32 +40,7 @@ resource "rabbitmq_exchange" "test" {
 }
 ```
 
-## Argument Reference
-
-The following arguments are supported:
-
-* `name` - (Required) The name of the exchange.
-
-* `vhost` - (Required) The vhost to create the resource in.
-
-* `settings` - (Required) The settings of the exchange. The structure is
-  described below.
-
-The `settings` block supports:
-
-* `type` - (Required) The type of exchange.
-
-* `durable` - (Optional) Whether the exchange survives server restarts.
-  Defaults to `false`.
-
-* `auto_delete` - (Optional) Whether the exchange will self-delete when all
-  queues have finished using it.
-
-* `arguments` - (Optional) Additional key/value settings for the exchange.
-
-## Attributes Reference
-
-No further attributes are exported.
+{{ .SchemaMarkdown | trimspace }}
 
 ## Import
 

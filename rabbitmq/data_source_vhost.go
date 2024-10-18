@@ -13,14 +13,17 @@ import (
 func dataSourcesVhost() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourcesReadVhost,
+		Description: "The `rabbitmq_vhost` data source retrieves information about a vhost.",
 		Schema: map[string]*schema.Schema{
 			"id": {
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "The id of the vhost.",
 			},
 			"name": {
-				Type:     schema.TypeString,
-				Required: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				Description: "The name of the vhost.",
 			},
 		},
 	}

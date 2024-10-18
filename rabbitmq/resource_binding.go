@@ -15,47 +15,54 @@ import (
 
 func resourceBinding() *schema.Resource {
 	return &schema.Resource{
-		Create: CreateBinding,
-		Read:   ReadBinding,
-		Delete: DeleteBinding,
+		Create:      CreateBinding,
+		Read:        ReadBinding,
+		Delete:      DeleteBinding,
+		Description: "The `rabbitmq_binding` resource creates and manages a binding relationship between a queue an exchange.",
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
 		Schema: map[string]*schema.Schema{
 			"source": {
-				Type:     schema.TypeString,
-				Required: true,
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The source exchange.",
 			},
 
 			"vhost": {
-				Type:     schema.TypeString,
-				Required: true,
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The vhost to create the resource in.",
 			},
 
 			"destination": {
-				Type:     schema.TypeString,
-				Required: true,
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The destination queue or exchange.",
 			},
 
 			"destination_type": {
-				Type:     schema.TypeString,
-				Required: true,
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The type of the destination. Must be either `queue` or `exchange`.",
 			},
 
 			"properties_key": {
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "A unique key to refer to the binding.",
 			},
 
 			"routing_key": {
-				Type:     schema.TypeString,
-				Optional: true,
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Optional:    true,
+				ForceNew:    true,
+				Description: "A routing key for the binding.",
 			},
 
 			"arguments": {
@@ -63,6 +70,7 @@ func resourceBinding() *schema.Resource {
 				Optional:      true,
 				ForceNew:      true,
 				ConflictsWith: []string{"arguments_json"},
+				Description:   "Additional key/value arguments for the binding. Conflicts with `arguments_json`",
 			},
 			"arguments_json": {
 				Type:             schema.TypeString,
@@ -71,6 +79,7 @@ func resourceBinding() *schema.Resource {
 				ValidateFunc:     validation.StringIsJSON,
 				ConflictsWith:    []string{"arguments"},
 				DiffSuppressFunc: structure.SuppressJsonDiff,
+				Description:      "Additional key/value arguments for the binding in JSON format. Conflicts with `arguments`",
 			},
 		},
 	}

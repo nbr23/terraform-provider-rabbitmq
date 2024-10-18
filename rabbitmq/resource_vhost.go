@@ -11,18 +11,20 @@ import (
 
 func resourceVhost() *schema.Resource {
 	return &schema.Resource{
-		Create: CreateVhost,
-		Read:   ReadVhost,
-		Delete: DeleteVhost,
+		Create:      CreateVhost,
+		Read:        ReadVhost,
+		Delete:      DeleteVhost,
+		Description: "The `rabbitmq_vhost` resource creates and manages a vhost in a RabbitMQ server.",
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {
-				Type:     schema.TypeString,
-				Required: true,
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The name of the vhost.",
 			},
 		},
 	}

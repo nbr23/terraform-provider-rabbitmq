@@ -11,54 +11,62 @@ import (
 
 func resourceExchange() *schema.Resource {
 	return &schema.Resource{
-		Create: CreateExchange,
-		Read:   ReadExchange,
-		Delete: DeleteExchange,
+		Create:      CreateExchange,
+		Read:        ReadExchange,
+		Delete:      DeleteExchange,
+		Description: "The `rabbitmq_exchange` resource creates and manages an exchange in a RabbitMQ server.",
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {
-				Type:     schema.TypeString,
-				Required: true,
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The name of the exchange.",
 			},
 
 			"vhost": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Default:  "/",
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "/",
+				ForceNew:    true,
+				Description: "The vhost to create the resource in.",
 			},
 
 			"settings": {
-				Type:     schema.TypeList,
-				Required: true,
-				ForceNew: true,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The settings for the exchange.",
+				MaxItems:    1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"type": {
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The type of the exchange.",
 						},
 
 						"durable": {
-							Type:     schema.TypeBool,
-							Optional: true,
-							Default:  false,
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
+							Description: "Whether the exchange is durable or not.",
 						},
 
 						"auto_delete": {
-							Type:     schema.TypeBool,
-							Optional: true,
-							Default:  false,
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
+							Description: "Whether the exchange is auto-deleted when no longer in use.",
 						},
 
 						"arguments": {
-							Type:     schema.TypeMap,
-							Optional: true,
+							Type:        schema.TypeMap,
+							Optional:    true,
+							Description: "Additional key/value settings for the exchange.",
 						},
 					},
 				},

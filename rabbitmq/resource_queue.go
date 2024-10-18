@@ -13,46 +13,52 @@ import (
 
 func resourceQueue() *schema.Resource {
 	return &schema.Resource{
-		Create: CreateQueue,
-		Read:   ReadQueue,
-		Delete: DeleteQueue,
+		Create:      CreateQueue,
+		Read:        ReadQueue,
+		Delete:      DeleteQueue,
+		Description: "The `rabbitmq_queue` resource creates and manages a queue in a RabbitMQ server.",
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {
-				Type:     schema.TypeString,
-				Required: true,
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The name of the queue.",
 			},
 
 			"vhost": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Default:  "/",
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "/",
+				ForceNew:    true,
+				Description: "The vhost to create the resource in.",
 			},
 
 			"settings": {
-				Type:     schema.TypeList,
-				Required: true,
-				ForceNew: true,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				ForceNew:    true,
+				MaxItems:    1,
+				Description: "The settings for the queue.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"durable": {
-							Type:     schema.TypeBool,
-							Optional: true,
-							Default:  false,
-							ForceNew: true,
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
+							ForceNew:    true,
+							Description: "Whether the queue survives server restarts.",
 						},
 
 						"auto_delete": {
-							Type:     schema.TypeBool,
-							Optional: true,
-							Default:  false,
-							ForceNew: true,
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
+							ForceNew:    true,
+							Description: "Whether the queue is deleted when the number of consumers drops to zero.",
 						},
 
 						"arguments": {
@@ -60,6 +66,7 @@ func resourceQueue() *schema.Resource {
 							Optional:      true,
 							ConflictsWith: []string{"settings.0.arguments_json"},
 							ForceNew:      true,
+							Description:   "Additional key/value settings for the queue. All values will be sent to RabbitMQ as a string. If you require non-string values, use `arguments_json`.",
 						},
 
 						"arguments_json": {
@@ -69,6 +76,7 @@ func resourceQueue() *schema.Resource {
 							ConflictsWith:    []string{"settings.0.arguments"},
 							DiffSuppressFunc: structure.SuppressJsonDiff,
 							ForceNew:         true,
+							Description:      "A nested JSON string which contains additional settings for the queue. This is useful for when the arguments contain non-string values.",
 						},
 					},
 				},

@@ -11,31 +11,35 @@ import (
 
 func resourceUser() *schema.Resource {
 	return &schema.Resource{
-		Create: CreateUser,
-		Update: UpdateUser,
-		Read:   ReadUser,
-		Delete: DeleteUser,
+		Create:      CreateUser,
+		Update:      UpdateUser,
+		Read:        ReadUser,
+		Delete:      DeleteUser,
+		Description: "The `rabbitmq_user` resource creates and manages a user in a RabbitMQ server.",
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {
-				Type:     schema.TypeString,
-				Required: true,
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The name of the user.",
 			},
 
 			"password": {
-				Type:      schema.TypeString,
-				Required:  true,
-				Sensitive: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				Sensitive:   true,
+				Description: "The password of the user.",
 			},
 
 			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem:     &schema.Schema{Type: schema.TypeString},
+				Type:        schema.TypeList,
+				Optional:    true,
+				Elem:        &schema.Schema{Type: schema.TypeString},
+				Description: "Which permission model to apply to the user. Valid options are: management, policymaker, monitoring, and administrator.",
 			},
 		},
 	}

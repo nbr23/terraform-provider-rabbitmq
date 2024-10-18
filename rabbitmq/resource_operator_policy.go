@@ -13,51 +13,59 @@ import (
 
 func resourceOperatorPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: CreateOperatorPolicy,
-		Update: UpdateOperatorPolicy,
-		Read:   ReadOperatorPolicy,
-		Delete: DeleteOperatorPolicy,
+		Create:      CreateOperatorPolicy,
+		Update:      UpdateOperatorPolicy,
+		Read:        ReadOperatorPolicy,
+		Delete:      DeleteOperatorPolicy,
+		Description: "The `rabbitmq_operator_policy` resource creates and manages operator policies for queues.",
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {
-				Type:     schema.TypeString,
-				Required: true,
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The name of the operator policy.",
 			},
 
 			"vhost": {
-				Type:     schema.TypeString,
-				Required: true,
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The vhost to create the resource in.",
 			},
 
 			"policy": {
-				Type:     schema.TypeList,
-				Required: true,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				MaxItems:    1,
+				Description: "The settings of the operator policy.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"pattern": {
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "A pattern to match an exchange or queue name.",
 						},
 
 						"priority": {
-							Type:     schema.TypeInt,
-							Required: true,
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "The policy with the greater priority is applied first.",
 						},
 
 						"apply_to": {
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "The type of object to apply the policy to.",
 						},
 
 						"definition": {
-							Type:     schema.TypeMap,
-							Required: true,
+							Type:        schema.TypeMap,
+							Required:    true,
+							Description: "Key/value pairs of the operator policy definition. See the RabbitMQ documentation for definition references and examples.",
 						},
 					},
 				},

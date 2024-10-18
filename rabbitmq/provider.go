@@ -19,6 +19,7 @@ func Provider() *schema.Provider {
 			"endpoint": {
 				Type:        schema.TypeString,
 				Required:    true,
+				Description: "The HTTP URL of the management plugin on the RabbitMQ server. This can also be sourced from the `RABBITMQ_ENDPOINT` Environment Variable. The RabbitMQ management plugin must be enabled in order to use this provider. Note: This is not the IP address or hostname of the RabbitMQ server that you would use to access RabbitMQ directly.",
 				DefaultFunc: schema.EnvDefaultFunc("RABBITMQ_ENDPOINT", nil),
 				ValidateFunc: func(v interface{}, k string) (ws []string, errors []error) {
 					value := v.(string)
@@ -33,6 +34,7 @@ func Provider() *schema.Provider {
 			"username": {
 				Type:        schema.TypeString,
 				Required:    true,
+				Description: "Username to use to authenticate with the server. This can also be sourced from the `RABBITMQ_USERNAME` Environment Variable.",
 				DefaultFunc: schema.EnvDefaultFunc("RABBITMQ_USERNAME", nil),
 				ValidateFunc: func(v interface{}, k string) (ws []string, errors []error) {
 					value := v.(string)
@@ -47,6 +49,7 @@ func Provider() *schema.Provider {
 			"password": {
 				Type:        schema.TypeString,
 				Required:    true,
+				Description: "Password for the given user. This can also be sourced from the `RABBITMQ_PASSWORD` Environment Variable.",
 				DefaultFunc: schema.EnvDefaultFunc("RABBITMQ_PASSWORD", nil),
 				ValidateFunc: func(v interface{}, k string) (ws []string, errors []error) {
 					value := v.(string)
@@ -61,30 +64,35 @@ func Provider() *schema.Provider {
 			"insecure": {
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Description: "Trust self-signed certificates. This can also be sourced from the `RABBITMQ_INSECURE` Environment Variable.",
 				DefaultFunc: schema.EnvDefaultFunc("RABBITMQ_INSECURE", nil),
 			},
 
 			"cacert_file": {
 				Type:        schema.TypeString,
 				Optional:    true,
+				Description: "The path to a custom CA / intermediate certificate. This can also be sourced from the `RABBITMQ_CACERT` Environment Variable.",
 				DefaultFunc: schema.EnvDefaultFunc("RABBITMQ_CACERT", ""),
 			},
 
 			"clientcert_file": {
 				Type:        schema.TypeString,
 				Optional:    true,
+				Description: "The path to the X.509 client certificate. This can also be sourced from the `RABBITMQ_CLIENTCERT` Environment Variable.",
 				DefaultFunc: schema.EnvDefaultFunc("RABBITMQ_CLIENTCERT", ""),
 			},
 
 			"clientkey_file": {
 				Type:        schema.TypeString,
 				Optional:    true,
+				Description: "The path to the private key. This can also be sourced from the `RABBITMQ_CLIENTKEY` Environment Variable.",
 				DefaultFunc: schema.EnvDefaultFunc("RABBITMQ_CLIENTKEY", ""),
 			},
 
 			"proxy": {
 				Type:        schema.TypeString,
 				Optional:    true,
+				Description: "The URL of a proxy through which to send HTTP requests to the RabbitMQ server. This can also be sourced from the `RABBITMQ_PROXY` Environment Variable. If not set, the default `HTTP_PROXY`/`HTTPS_PROXY` will be used instead.",
 				DefaultFunc: schema.EnvDefaultFunc("RABBITMQ_PROXY", ""),
 			},
 		},

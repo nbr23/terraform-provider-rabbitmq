@@ -2,6 +2,10 @@ GOFMT_FILES?=$$(find . -name '*.go' |grep -v vendor)
 
 default: build
 
+docs:
+	@echo "Generating docs"
+	@cd tools && go generate ./...
+
 build: fmtcheck
 	go install
 
@@ -31,5 +35,5 @@ fmtcheck:
 errcheck:
 	@sh -c "'$(CURDIR)/scripts/errcheck.sh'"
 
-.PHONY: build test testacc vet fmt fmtcheck errcheck
+.PHONY: build test testacc vet fmt fmtcheck errcheck docs
 

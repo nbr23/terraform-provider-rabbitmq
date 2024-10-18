@@ -36,26 +36,7 @@ resource "rabbitmq_permissions" "test" {
 }
 ```
 
-## Argument Reference
-
-The following arguments are supported:
-
-* `user` - (Required) The user to apply the permissions to.
-
-* `vhost` - (Required) The vhost to create the resource in.
-
-* `permissions` - (Required) The settings of the permissions. The structure is
-  described below.
-
-The `permissions` block supports:
-
-* `configure` - (Required) The "configure" ACL.
-* `write` - (Required) The "write" ACL.
-* `read` - (Required) The "read" ACL.
-
-## Attributes Reference
-
-No further attributes are exported.
+{{ .SchemaMarkdown | trimspace }}
 
 ## Import
 

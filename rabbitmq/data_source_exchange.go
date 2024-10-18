@@ -14,10 +14,12 @@ import (
 func dataSourcesExchange() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourcesReadExchange,
+		Description: "The `rabbitmq_exchange` data source retrieves information about an exchange.",
 		Schema: map[string]*schema.Schema{
 			"id": {
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "The id of the exchange. This is a combination of the name and vhost.",
 			},
 			"name": {
 				Type:     schema.TypeString,

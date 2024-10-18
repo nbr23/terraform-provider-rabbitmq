@@ -13,51 +13,59 @@ import (
 
 func resourcePolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: CreatePolicy,
-		Update: UpdatePolicy,
-		Read:   ReadPolicy,
-		Delete: DeletePolicy,
+		Create:      CreatePolicy,
+		Update:      UpdatePolicy,
+		Read:        ReadPolicy,
+		Delete:      DeletePolicy,
+		Description: "The `rabbitmq_policy` resource creates and manages policies for exchanges and queues.",
 		Importer: &schema.ResourceImporter{
 			StateContext: schema.ImportStatePassthroughContext,
 		},
 
 		Schema: map[string]*schema.Schema{
 			"name": {
-				Type:     schema.TypeString,
-				Required: true,
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The name of the policy.",
 			},
 
 			"vhost": {
-				Type:     schema.TypeString,
-				Required: true,
-				ForceNew: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The vhost to create the resource in.",
 			},
 
 			"policy": {
-				Type:     schema.TypeList,
-				Required: true,
-				MaxItems: 1,
+				Type:        schema.TypeList,
+				Required:    true,
+				MaxItems:    1,
+				Description: "The settings of the policy.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"pattern": {
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "A pattern to match an exchange or queue name.",
 						},
 
 						"priority": {
-							Type:     schema.TypeInt,
-							Required: true,
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "The policy with the greater priority is applied first.",
 						},
 
 						"apply_to": {
-							Type:     schema.TypeString,
-							Required: true,
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Can either be `exchanges`, `queues`, or `all`.",
 						},
 
 						"definition": {
-							Type:     schema.TypeMap,
-							Required: true,
+							Type:        schema.TypeMap,
+							Required:    true,
+							Description: "Key/value pairs of the policy definition. See the RabbitMQ documentation for definition references and examples.",
 						},
 					},
 				},
